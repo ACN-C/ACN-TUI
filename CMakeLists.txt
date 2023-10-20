@@ -5,9 +5,7 @@ project(ACNTUI
   VERSION 0.0.0.1
   )
 
-if (UNIX)
-  set (CMAKE_CXX_FLAGS "--debug -g3 -Wall -O0")
-endif ()
+SET(PROJECT_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/)
 
 include_directories (${ACNTUI_SOURCE_DIR}/src)
 
@@ -30,13 +28,12 @@ endif()
 FetchContent_MakeAvailable(ftxui)
 
 set (ACNTUI_SOURCES
-  ${ACNTUI_SOURCE_DIR}/src/main.cpp
-  ${ACNTUI_SOURCE_DIR}/src/Welcome.cpp
+  ${ACNTUI_SOURCE_DIR}/main.cpp
   )
-
-add_executable(${CMAKE_PROJECT_NAME} ${ACNTUI_SOURCES})
+add_executable( ${CMAKE_PROJECT_NAME} ${ACNTUI_SOURCES})
+target_include_directories(ACNTUI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 target_link_libraries(${CMAKE_PROJECT_NAME} 
-  PRIVATE ftxui::screen
-  PRIVATE ftxui::dom
-  PRIVATE ftxui::component
+  #PRIVATE ftxui::screen
+  #PRIVATE ftxui::dom
+  #PRIVATE ftxui::component
 )
